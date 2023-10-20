@@ -21,7 +21,7 @@ bot.on(`callback_query`, async ctx => {
             ]
 
             await ctx.answerCbQuery(``)
-            await ctx.editMessageText(pesan)
+            await ctx.editMessageText(pesan, { reply_markup: markup.inlineKeyboard(keyb) })
             return;
         }
 
