@@ -14,7 +14,32 @@ bot.on(`callback_query`, async ctx => {
         var keyb = []
         var cck;
 
-        if (/about_$/i.exec(data)) { return await ctx.answerCbQuery(`Menu unavailable.`) }
+        if (/about_$/i.exec(data)) {
+            var pesan = `Source code: https://github.com/TheAlexSandro/Truth-Or-Dare/`
+            keyb[0] = [
+                btn.text(`⬅️ Return`, `start_`)
+            ]
+
+            await ctx.answerCbQuery(``)
+            await ctx.editMessageText(pesan)
+            return;
+        }
+
+        if (/start_$/i.exec(data)) {
+            var pesan = `👋 Hi ${await helper.getName(ctx)}, I am Truth Or Dare game bot.`
+            pesan += `\n\n👉 <b>How to use me?</b> just add me to your group and use /truth or /dare command with reply to someone message or not.`
+            pesan += `\n\n👌 And enjoy the game...`
+            keyb[0] = [
+                btn.url(`Add to your group ↗️`, `https://t.me/${variable.botUname}?startgroup=true`)
+            ]
+            keyb[1] = [
+                btn.text(`ℹ️ About`, `about_`)
+            ]
+
+            await ctx.answerCbQuery(``)
+            await ctx.editMessageText(pesan, { reply_markup: markup.inlineKeyboard(keyb), parse_mode: 'HTML' })
+            return;
+        }
 
         if (cck = /gameCallback_(.+)_(.+)_(.+)/i.exec(data)) {
             var game = cck[1]
@@ -41,6 +66,7 @@ bot.on(`callback_query`, async ctx => {
                 var names = await helper.getName(ctx)
                 var pesan = `💩 ${names} giving up on answering the challenge given to him/her.`
 
+                await ctx.answerCbQuery(``)
                 await ctx.replyWithHTML(pesan, { parse_mode: 'HTML' })
                 prop.read(`challenger_` + userID + chatID)
                 prop.read(`session_truth_` + userID + chatID)
@@ -89,6 +115,7 @@ bot.on(`callback_query`, async ctx => {
                         btn.text(`💩 Surrend`, `gameCallback_${game}_surrend_${userID}`)
                     ]
 
+                    await ctx.answerCbQuery(``)
                     var atg = await ctx.editMessageText(pesan, { reply_markup: markup.inlineKeyboard(keyb), parse_mode: 'HTML' })
                     var time = 30
                     var inter = timer[timesID] = setInterval(async () => {
@@ -133,6 +160,7 @@ bot.on(`callback_query`, async ctx => {
                         btn.text(`💩 Surrend`, `gameCallback_${game}_surrend_${userID}`)
                     ]
 
+                    await ctx.answerCbQuery(``)
                     await ctx.editMessageText(pesan, { reply_markup: markup.inlineKeyboard(keyb), parse_mode: 'HTML' })
                     return;
                 }
@@ -152,6 +180,7 @@ bot.on(`callback_query`, async ctx => {
                         btn.text(`💩 Surrend`, `gameCallback_${game}_surrend_${userID}`)
                     ]
 
+                    await ctx.answerCbQuery(``)
                     var atg = await ctx.editMessageText(pesan, { parse_mode: 'HTML', reply_markup: markup.inlineKeyboard(keyb) })
                     prop.set(`session_truth_` + userID + chatID, atg.message_id)
                     prop.set(`game_id_` + atg.message_id + userID + chatID, 'true')
@@ -200,6 +229,7 @@ bot.on(`callback_query`, async ctx => {
                         btn.text(`💩 Surrend`, `gameCallback_${game}_surrend_${userID}`)
                     ]
 
+                    await ctx.answerCbQuery(``)
                     var atg = await ctx.editMessageText(pesan, { parse_mode: 'HTML', reply_markup: markup.inlineKeyboard(keyb) })
                     prop.set(`session_dare_` + userID + chatID, atg.message_id)
                     return;
