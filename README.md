@@ -1,4 +1,4 @@
-# Truth-Or-Dare
+# Truth Or Dare
 This is the public source code for -> <a href='https://t.me/TOENGameBot'>@TOENGameBot</a> on telegram.
 
 ## About Bot
