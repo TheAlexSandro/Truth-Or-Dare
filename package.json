@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "axios": "^1.5.1",
+    "express": "^4.18.2",
+    "properties-reader": "^2.3.0",
+    "socket.io": "^4.7.2",
+    "telegraf": "^4.14.0"
+  },
+  "name": "tod",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["truth-or-dare", "telegram", "bot", "nodejs"],
+  "author": "Kevin :D",
+  "license": "MIT",
+  "description": "A telegram bot to play truth or dare game."
+}
